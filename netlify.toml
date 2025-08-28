@@ -1,23 +1,13 @@
 [build]
-  publish = "staticfiles" # Netlify 需要这个目录存在
-  command = "pip install -r requirements.txt && mkdir -p staticfiles" # 新增了创建目录的命令
-
-[[redirects]]
-  from = "/*"
-  to = "/api/index.py"
-  status = 200
-  force = false
-  conditions = {RequestPath = ["!^/static/", "!^/_next/static/", "!^/admin/static/", "!^/favicon.ico", "!^/robots.txt"]}
+  publish = "staticfiles"
+  command = "pip install -r requirements.txt && mkdir -p staticfiles"
 
 [[redirects]]
   from = "/static/*"
   to = "/static/:splat"
   status = 200
-  force = false
 
 [[redirects]]
   from = "/*"
   to = "/api/index.py"
   status = 200
-  force = false
-  conditions = {RequestPath = ["!^/static/"]}
