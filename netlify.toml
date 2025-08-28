@@ -1,20 +1,23 @@
 [build]
-  publish = "public"
-  command = "mkdir -p public && echo '<html><body>Qexo with Supabase</body></html>' > public/index.html"
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/qexo/:splat"
-  status = 200
+  publish = "staticfiles"  # 这是 Django collectstatic 命令输出的目录，也可能是 "public"
+  command = "pip install -r requirements.txt && python manage.py collectstatic --noinput"
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/qexo/:splat"
+  to = "/api/index.py"
   status = 200
+  force = false
+  conditions = {RequestPath = ["!^/static/", "!^/_next/static/", "!^/admin/static/", "!^/favicon.ico", "!^/robots.txt"]}
 
-[functions]
-  directory = "netlify/functions"
+[[redirects]]
+  from = "/static/*"
+  to = "/static/:splat"
+  status = 200
+  force = false
 
-# 增加超时时间，Qexo 可能需要更长时间
-[functions.qexo]
-  timeout = 30
+[[redirects]]
+  from = "/*"
+  to = "/api/index.py"
+  status = 200
+  force = false
+  conditions = {RequestPath = ["!^/static/"]}
