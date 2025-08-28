@@ -1,6 +1,6 @@
 [build]
-  publish = "staticfiles"
-  command = "pip install -r requirements.txt"
+  publish = "staticfiles" # Netlify 需要这个目录存在
+  command = "pip install -r requirements.txt && mkdir -p staticfiles" # 新增了创建目录的命令
 
 [[redirects]]
   from = "/*"
