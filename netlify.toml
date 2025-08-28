@@ -1,0 +1,16 @@
+[build]
+  publish = "public"
+  command = "echo 'No build'"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/qexo/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/qexo/index"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
