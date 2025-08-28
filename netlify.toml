@@ -1,6 +1,6 @@
 [build]
-  publish = "staticfiles"  # 这是 Django collectstatic 命令输出的目录，也可能是 "public"
-  command = "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  publish = "staticfiles"
+  command = "pip install -r requirements.txt"
 
 [[redirects]]
   from = "/*"
