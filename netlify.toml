@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "mkdir -p public && echo '<html><body>Qexo Backend</body></html>' > public/index.html"
+  command = "mkdir -p public && echo '<html><body>Qexo with Supabase</body></html>' > public/index.html"
 
 [[redirects]]
   from = "/api/*"
@@ -15,7 +15,6 @@
 [functions]
   directory = "netlify/functions"
 
-[dev]
-  command = "python manage.py runserver"
-  targetPort = 5000
-  publish = "public"
+# 增加超时时间，Qexo 可能需要更长时间
+[functions.qexo]
+  timeout = 30
