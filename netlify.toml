@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "echo 'No build'"
+  command = "mkdir -p public && echo '<html><body>Qexo Backend</body></html>' > public/index.html"
 
 [[redirects]]
   from = "/api/*"
@@ -9,8 +9,13 @@
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/qexo/index"
+  to = "/.netlify/functions/qexo/:splat"
   status = 200
 
 [functions]
-  node_bundler = "esbuild"
+  directory = "netlify/functions"
+
+[dev]
+  command = "python manage.py runserver"
+  targetPort = 5000
+  publish = "public"
