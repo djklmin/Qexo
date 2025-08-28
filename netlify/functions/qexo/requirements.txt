@@ -1,0 +1,6 @@
+flask==2.3.3
+werkzeug==2.3.7
+psycopg2-binary==2.9.9
+python-dotenv==1.0.0
+sqlalchemy==2.0.23
+# 其他 Qexo 需要的依赖
