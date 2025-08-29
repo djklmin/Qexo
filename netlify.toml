@@ -16,10 +16,3 @@
   from = "/static/*"
   to = "/static/:splat"
   status = 200
-  force = true
-
-# Admin 静态文件（如果需要）
-[[redirects]]
-  from = "/admin/static/*"
-  to = "/static/admin/:splat"
-  status = 200
