@@ -2,12 +2,24 @@
   publish = "staticfiles"
   command = "pip install -r requirements.txt && mkdir -p staticfiles"
 
+[functions]
+  directory = "netlify/functions"
+
+# 重定向所有请求到 Django Function
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/django"
+  status = 200
+
+# 静态文件处理
 [[redirects]]
   from = "/static/*"
   to = "/static/:splat"
   status = 200
+  force = true
 
+# Admin 静态文件（如果需要）
 [[redirects]]
-  from = "/*"
-  to = "/api/index.py"
+  from = "/admin/static/*"
+  to = "/static/admin/:splat"
   status = 200
