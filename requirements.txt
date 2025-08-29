@@ -20,3 +20,5 @@ pymongo==3.13.0
 dnspython==2.2.1
 sqlparse==0.2.4
 serverless-wsgi>=3.0.0
+Django>=3.2
+psycopg2-binary>=2.9.0
