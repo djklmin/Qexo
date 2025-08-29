@@ -1,44 +1,18 @@
 import os
 import sys
-from serverless_wsgi import handle_request
+import django
+from django.core.handlers.wsgi import WSGIHandler
 
-# 添加项目根目录到 Python 路径
+# 设置路径
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hexoweb.settings')
 
-# 尝试导入配置
-try:
-    # 先尝试从环境变量获取配置
-    from hexoweb.settings import *
-except ImportError:
-    # 如果失败，尝试手动设置
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hexoweb.settings')
-    
-    import django
-    from django.conf import settings
-    
-    if not settings.configured:
-        settings.configure(
-            DEBUG=False,
-            SECRET_KEY=os.environ.get('SECRET_KEY', 'dummy-secret-key-for-netlify'),
-            INSTALLED_APPS=[
-                'django.contrib.auth',
-                'django.contrib.contenttypes',
-                'django.contrib.sessions',
-                'hexoweb',
-            ],
-            DATABASES={
-                'default': {
-                    'ENGINE': 'django.db.backends.sqlite3',
-                    'NAME': '/tmp/db.sqlite3',
-                }
-            },
-            USE_TZ=True,
-        )
-    
-    django.setup()
+# 配置 Django
+django.setup()
 
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+# 创建 application
+application = WSGIHandler()
 
 def handler(event, context):
-    return handle_request(application, event, context)
+    from django.http import HttpResponse
+    return HttpResponse("Django is working! Now we need to handle requests properly.")
