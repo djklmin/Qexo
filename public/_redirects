@@ -1,0 +1,5 @@
+# 重定向所有请求到 Netlify Function
+/* /.netlify/functions/django 200
+
+# 静态文件处理（如果需要）
+/static/* /static/:splat 200
